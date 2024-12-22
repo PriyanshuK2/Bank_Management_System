@@ -1,0 +1,174 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+    </header>
+    <div class="container">
+        <h1>Customer Registration</h1>
+        <form id="customerRegistrationForm" onsubmit="return getCustomerReg()">
+            <div class="textbox">
+                <label for="ssnId">Customer SSN ID:</label>
+                <input type="text" id="ssnId" readonly>
+
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" required>
+
+                <label for="accountNumber">Account Number:</label>
+                <input type="text" id="accountNumber" required>
+
+                <label for="ifscCode">IFSC Code:*</label>
+                <input type="text" id="ifscCode" required>
+
+                <label for="accountBalance">Account Balance:</label>
+                <input type="number" id="accountBalance"  required>
+
+                <label for="aadhaarCard">Aadhaar Card No.:</label>
+                <input type="text" id="aadhaarCard" maxlength="12" minlength="12" required>
+
+                <label for="panCard">PAN Card No.:</label>
+                <input type="text" id="panCard" maxlength="10" minlength="9" required>
+
+                <label for="dob">Date Of Birth:</label>
+                <input type="date" id="dob" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="maritalStatus">Marital Status:</label>
+                <select id="maritalStatus" required>
+                    <option value="">Select</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                </select>
+
+                <label for="customerEmail">Email:</label>
+                <input type="email" id="customerEmail" required>
+
+                <label for="customerAddress">Address:</label>
+                <textarea id="customerAddress" required></textarea>
+
+                <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" maxlength="10" minlength="10" required>
+            </div>
+
+            <button type="submit">Register Customer</button>
+            <p id="message1"></p>
+            <button type="button" onclick="location.href='index.html'">Go to Home</button>
+        </form>
+    </div>
+
+    <script src="customerScript.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Customer Registration</h1>
+        <form id="customerRegistrationForm" onsubmit="return getCustomerReg()">
+
+            <!-- Personal Information Section -->
+            <section class="form-section">
+                <h2>Personal Information</h2>
+                <div class="textbox">
+                    <label for="customerName">Customer Name:</label>
+                    <input type="text" id="customerName" required>
+
+                    <label for="dob">Date Of Birth:</label>
+                    <input type="date" id="dob" required>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+
+                    <label for="maritalStatus">Marital Status:</label>
+                    <select id="maritalStatus" required>
+                        <option value="">Select</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                    </select>
+                    <label for="aadhaarCard">Aadhaar Card No.:</label>
+                    <input type="text" id="aadhaarCard" maxlength="12" minlength="12" required>
+
+                    <label for="panCard">PAN Card No.:</label>
+                    <input type="text" id="panCard" maxlength="10" minlength="9" required>
+                </div>
+            </section>
+
+            <!-- Banking Information Section -->
+            <section class="form-section">
+                <h2>Banking Information</h2>
+                <div class="textbox">
+                    <label for="ssnId">Customer SSN ID:</label>
+                    <input type="text" id="ssnId" readonly>
+
+                    <label for="accountNumber">Account Number:</label>
+                    <input type="text" id="accountNumber" required>
+
+                    <label for="ifscCode">IFSC Code:</label>
+                    <input type="text" id="ifscCode" required>
+
+                    <label for="accountBalance">Account Balance:</label>
+                    <input type="number" id="accountBalance" required>
+                </div>
+            </section>
+
+            <!-- Contact Information Section -->
+            <section class="form-section">
+                <h2>Contact Information</h2>
+                <div class="textbox">
+
+                    <label for="customerEmail">Email:</label>
+                    <input type="email" id="customerEmail" required>
+
+                    <label for="customerAddress">Address:</label>
+                    <textarea id="customerAddress" required></textarea>
+
+                    <label for="contactNumber">Contact Number:</label>
+                    <input type="text" id="contactNumber" maxlength="10" minlength="10" required>
+                </div>
+            </section>
+
+            <button type="submit">Register Customer</button>
+            <p id="message1"></p>
+            <button type="button" onclick="location.href='index.html'">Go to Home</button>
+        </form>
+    </div>
+
+    <script src="customerScript.js"></script>
+</body>
+</html>

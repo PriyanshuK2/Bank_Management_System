@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Celestial Bank Management System</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="output.jpg" alt="Bank Logo" class="logo-img">
+            <h1>Celestial Bank</h1>
+        </div>
+        <nav>
+            <ul>
+                <!-- Customer Management Dropdown -->
+                <li>
+                    <a href="#">Customer Management</a>
+                    <div class="dropdown-menu">
+                        <a href="register_customer.html">Register Customer</a>
+                        <a href="searchCustomer.html">Update Customer Details</a>
+                        <a href="deleteCustomerSearch.html">Remove Customer</a>
+                    </div>
+                </li>
+
+                <!-- Transaction Management Dropdown -->
+                <li>
+                    <a href="#">Transaction Management</a>
+                    <div class="dropdown-menu">
+                        <a href="transactions.html">New Transaction</a>
+                        <a href="view_transactions.html">View Transactions</a>
+                    </div>
+                </li>
+
+                <!-- Loan Management Dropdown -->
+                <li>
+                    <a href="#">Loan Management</a>
+                    <div class="dropdown-menu">
+                        <a href="loan_apply.html">New Loan Registration</a>
+                        <a href="search-customer.html">Approve/Reject Loan</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="auth-button" id="authButton" onclick="return toIn()">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h2>Welcome to Celestial Bank Management System</h2>
+            <p>Manage employees, customers, transactions, and loan applications all in one place.</p>
+        </section>
+
+        <section class="info-tabs">
+            <div class="info-tab">
+                <img src="loan-1712653454.jpg" alt="Loan Ad">
+                <h3>Apply for a Loan</h3>
+                <p>Get the best loan offers with low-interest rates. Apply now for personal and home loans.</p>
+                <a href="loan_apply.html">Learn More</a>
+            </div>
+
+            <div class="info-tab">
+                <img src="dos-and-donts-of-opening-a-new-savings-account.jpg" alt="New Account Ad">
+                <h3>Open a New Account</h3>
+                <p>Enjoy exclusive benefits with our new account packages. Get started today!</p>
+                <a href="register_customer.html">Learn More</a>
+            </div>
+
+            <div class="info-tab">
+                <img src="output (2).jpg" alt="Customer Benefits">
+                <h3>Exclusive Benefits for Customers</h3>
+                <p>Explore our wide range of customer benefits, from higher savings interest to cashback offers.</p>
+                <a href="register_customer.html">Learn More</a>
+            </div>
+
+            <div class="info-tab">
+                <img src="BannerProcons.jpg" alt="Loan Interest Rates">
+                <h3>Affordable Loan Interest Rates</h3>
+                <p>Check out our competitive loan interest rates. We offer flexible repayment options for you!</p>
+                <a href="loan_apply.html">Learn More</a>
+            </div>
+        </section>
+
+        <section class="footer-info">
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        function toIn(){
+            window.location.href="index.html";
+            return false;
+        }
+    </script>
+
+</body>
+</html>

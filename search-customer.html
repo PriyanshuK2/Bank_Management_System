@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Loan by Loan ID</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Search Loan by Loan ID</h1>
+        <form id="searchForm">
+            <div class="textbox">
+            <label for="loanId">Enter Loan ID:</label>
+            <input type="text" id="loanId" required></div>
+            <button type="submit">Search</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const loanId = document.getElementById("loanId").value;
+
+            // Search loan data from localStorage by Loan ID
+            const loan = JSON.parse(localStorage.getItem(loanId));
+
+            if (loan) {
+                // If loan found, redirect to loan management page
+                window.location.href = `loan-management.html?loanId=${loanId}`;
+            } else {
+                // If loan not found, show error message
+                document.getElementById("message").innerText = "Loan not found!";
+                document.getElementById("message").style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>
+

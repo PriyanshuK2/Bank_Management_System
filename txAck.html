@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Acknowledgment</title>
+    <link rel="stylesheet" href="ack.css">
+</head>
+<body>
+    <!-- <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+    </header> -->
+
+    <div class="ack-container">
+        <h1>Transaction Successful!</h1>
+        <div class="details" id="transactionDetails"></div>
+        <p>You will be redirected to the home page shortly...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve the transaction ID from query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const transactionId = urlParams.get("transactionId");
+
+            // Retrieve transaction data from localStorage
+            const txData = JSON.parse(localStorage.getItem(transactionId));
+
+            // Check if transaction data exists and display it
+            if (txData) {
+                const transactionDetails = `
+                    <p><strong>Transaction ID:</strong> ${txData.transactionId}</p>
+                    <p><strong>Customer SSN ID:</strong> ${txData.customerSsnId}</p>
+                    <p><strong>Customer Name:</strong> ${txData.customerName}</p>
+                    <p><strong>Contact Number:</strong> ${txData.contactNumber}</p>
+                    <p><strong>Aadhaar No:</strong> ${txData.aadhaarNo}</p>
+                    <p><strong>PAN Card No:</strong> ${txData.panCardNo}</p>
+                    <p><strong>Transaction Amount:</strong> ${txData.transactionAmount}</p>
+                    <p><strong>Transaction Date:</strong> ${txData.transactionDate}</p>
+                `;
+                document.getElementById("transactionDetails").innerHTML = transactionDetails;
+            } else {
+                document.getElementById("transactionDetails").innerText = "Transaction details not found.";
+            }
+        });
+
+        // Redirect to the home page after 3.5 seconds
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 3500);  // Redirect after 3.5 seconds
+    </script>
+</body>
+</html>

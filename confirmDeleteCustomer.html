@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Customer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Remove Customer</h1>
+        <div id="customerDetails">
+            <!-- Customer details will be dynamically added here -->
+        </div>
+        <p id="deleteMessage"></p>
+        <button id="deleteButton">Delete Customer</button>
+        <button id="cancelButton">Cancel and Return to Home</button>
+    </div>
+
+    <script>
+        // Extract SSN from the query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const customerSSN = urlParams.get("ssnId");
+
+        console.log("SSN from URL:", customerSSN); // Debugging output
+
+        // Load customer data and display it
+        window.onload = function() {
+            // Retrieve customer data for the specific SSN from localStorage
+            const customerData = JSON.parse(localStorage.getItem(customerSSN));
+
+            console.log("Retrieved customer data:", customerData); // Debugging output
+
+            // Display customer details if data exists
+            if (customerData) {
+                document.getElementById("customerDetails").innerHTML = `
+                    <p><strong>Customer SSN ID:</strong> ${customerData.ssnId}</p>
+                    <p><strong>Customer Name:</strong> ${customerData.cName}</p>
+                    <p><strong>Email:</strong> ${customerData.custEmail}</p>
+                    <p><strong>Account Number:</strong> ${customerData.accNo}</p>
+                    <p><strong>IFSC Code:</strong> ${customerData.ifsc}</p>
+                    <p><strong>Contact Number:</strong> ${customerData.cNo}</p>
+                    <p><strong>Account Balance:</strong> ₹${customerData.accBal}</p>
+                    <p><strong>Aadhaar Number:</strong> ${customerData.aadhaar}</p>
+                    <p><strong>PAN Card Number:</strong> ${customerData.panCard}</p>
+                    <p><strong>Date of Birth:</strong> ${customerData.dob}</p>
+                    <p><strong>Gender:</strong> ${customerData.gender}</p>
+                    <p><strong>Marital Status:</strong> ${customerData.maritalStatus}</p>
+                    <p><strong>Address:</strong> ${customerData.cAdd}</p>
+                    <p>Are you sure you want to delete this customer?</p>
+                `;
+            } else {
+                // Fallback if customer data is not found
+                document.getElementById("deleteMessage").innerText = "Customer data not found.";
+                document.getElementById("deleteMessage").style.color = "red";
+                document.getElementById("deleteButton").style.display = "none";
+            }
+        };
+
+        // Handle delete confirmation
+        document.getElementById("deleteButton").addEventListener("click", function() {
+            // Remove customer data from localStorage
+            const customerData = JSON.parse(localStorage.getItem(customerSSN));
+
+            if (customerData) {
+                // Delete customer data from localStorage
+                localStorage.removeItem(customerSSN);
+                // Display success message and redirect to home
+                document.getElementById("deleteMessage").innerText = "Customer deleted successfully!";
+                document.getElementById("deleteMessage").style.color = "green";
+                setTimeout(() => {
+                    window.location.href = "index.html"; // Redirect to homepage
+                }, 2000); // Redirect after 2 seconds
+            } else {
+                // Fallback if customer data is not found
+                document.getElementById("deleteMessage").innerText = "Customer data not found. Deletion failed.";
+                document.getElementById("deleteMessage").style.color = "red";
+            }
+        });
+
+        // Handle cancel button
+        document.getElementById("cancelButton").addEventListener("click", function() {
+            window.location.href = "index.html"; // Redirect to home
+        });
+    </script>
+</body>
+</html>

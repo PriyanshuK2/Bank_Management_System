@@ -1,0 +1,99 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Acknowledgment</title>
+    <link rel="stylesheet" href="ack.css">
+</head>
+<body>
+    <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+    </header> 
+    <div class="ack-container">
+        <h1>Loan Application Successful!</h1>
+        <div class="details" id="loanDetails"></div>
+        <p>You will be redirected to the home page shortly...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ssnId = urlParams.get("ssnId");
+            const customerName = urlParams.get("name");
+            const email = urlParams.get("email");
+            const contactNumber = urlParams.get("contactNumber");
+            const loanAmount = urlParams.get("loanAmount");
+
+            const loanDetails = `
+                <p><strong>Customer SSN ID:</strong> ${ssnId}</p>
+                <p><strong>Customer Name:</strong> ${customerName}</p>
+                <p><strong>Contact Number:</strong> ${contactNumber}</p>
+                <p><strong>Customer Email:</strong> ${email}</p>
+                <p><strong>Loan Amount:</strong> ${loanAmount}</p>
+            `;
+            document.getElementById("loanDetails").innerHTML = loanDetails;
+        });
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 3500);
+    </script>
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Registration Acknowledgment</title>
+    <link rel="stylesheet" href="ack.css">
+</head>
+<body>
+    <!-- <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+    </header> -->
+    <div class="container">
+        <h1>Loan Registration Successful!</h1>
+        <div id="loanDetails"></div>
+        <p>You will be redirected to the home page shortly...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loanId = urlParams.get("loanId");
+
+            // Fetch loan data from localStorage using the loanId
+            const loanData = JSON.parse(localStorage.getItem(loanId));
+
+            if (loanData) {
+                const loanDetails = `
+                    <p><strong>Loan ID:</strong> ${loanData.loanId}</p>
+                    <p><strong>SSN ID:</strong> ${loanData.ssnId}</p>
+                    <p><strong>Customer Name:</strong> ${loanData.customerName}</p>
+                    <p><strong>Occupation:</strong> ${loanData.occupation}</p>
+                    <p><strong>Employer Name:</strong> ${loanData.employerName}</p>
+                    <p><strong>Employer Address:</strong> ${loanData.employerAddress}</p>
+                    <p><strong>Customer Email:</strong> ${loanData.customerEmail}</p>
+                    <p><strong>Customer Address:</strong> ${loanData.customerAddress}</p>
+                    <p><strong>Marital Status:</strong> ${loanData.maritalStatus}</p>
+                    <p><strong>Contact Number:</strong> ${loanData.contactNumber}</p>
+                    <p><strong>Loan Amount:</strong> ${loanData.loanAmount}</p>
+                    <p><strong>Loan Duration:</strong> ${loanData.loanDuration} years</p>
+                `;
+                document.getElementById("loanDetails").innerHTML = loanDetails;
+            } else {
+                document.getElementById("loanDetails").innerText = "Loan data not found.";
+            }
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 3500);
+        });
+    </script>
+</body>
+</html>

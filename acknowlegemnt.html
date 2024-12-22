@@ -1,0 +1,82 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Acknowledgment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Successful!</h1>
+        <p id="empDetails"></p>
+        <button onclick="redirectToLogin()">Go to Login</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const empId = urlParams.get("empId");
+            const Efname = urlParams.get("Efname");
+            const Elname = urlParams.get("Elname");
+            const empEmail = urlParams.get("empEmail");
+            const empCno = urlParams.get("empCno");
+
+            const empDetails = `
+                <strong>Employee ID:</strong> ${empId}<br>
+                <strong>Name:</strong> ${Efname} ${Elname}<br>
+                <strong>Email:</strong> ${empEmail}<br>
+                <strong>Contact Number:</strong> ${empCno}
+            `;
+            document.getElementById("empDetails").innerHTML = empDetails;
+        });
+
+        function redirectToLogin() {
+            window.location.href = "login_employee.html";
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Acknowledgment</title>
+    <link rel="stylesheet" href="ack.css">
+</head>
+<body>
+    <div class="ack-container">
+        <h1>Registration Successful!</h1>
+        <div class="details" id="empDetails"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const empId = urlParams.get("empId");
+            const Efname = urlParams.get("Efname");
+            const Elname = urlParams.get("Elname");
+            const empEmail = urlParams.get("empEmail");
+            const empCno = urlParams.get("empCno");
+
+            const empDetails = `
+                <p><strong>Employee ID:</strong> ${empId}</p>
+                <p><strong>Name:</strong> ${Efname} ${Elname}</p>
+                <p><strong>Email:</strong> ${empEmail}</p>
+                <p><strong>Contact Number:</strong> ${empCno}</p>
+            `;
+            document.getElementById("empDetails").innerHTML = empDetails;
+        });
+
+        // function redirectToHome() {
+        //     window.location.href = "index.html";
+        // }
+
+        setTimeout(() => {
+            window.location.href = "logged_in_Homepage.html";
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Transaction</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Search Transaction</h2>
+        <form id="searchForm" onsubmit="return searchTransaction()">
+            <div class="textbox">
+                <label for="searchTransactionId">Enter Transaction ID:</label>
+                <input type="text" id="searchTransactionId" required>
+            </div>
+            <button type="button1">Search</button>
+        </form>
+        <p id="searchMessage"></p>
+    </div>
+    <script src="searchScript.js"></script>
+</body>
+</html>

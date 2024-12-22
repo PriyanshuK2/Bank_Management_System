@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Transaction Details</h1>
+        <form id="transactionForm" onsubmit="return validateForm()">
+            <div class="textbox">
+                <label for="transactionId">Transaction ID:</label>
+                <input type="text" id="transactionId" readonly>
+
+                <label for="customerSsnId">Customer SSN ID:</label>
+                <input type="text" id="customerSsnId"  required maxlength="7">
+                
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" required maxlength="50">
+                
+                <label for="accountId">Account ID:</label>
+                <input type="text" id="accountId" required maxlength="20">
+                
+                <label for="aadhaarNo">Aadhaar Card No:</label>
+                <input type="text" id="aadhaarNo" required maxlength="12">
+                
+                <label for="panCardNo">PAN Card No:</label>
+                <input type="text" id="panCardNo" required maxlength="10">
+                
+                <label for="address">Address:</label>
+                <textarea id="address" required maxlength="100"></textarea>
+                
+                <label for="transactionDate">Date:</label>
+                <input type="date" id="transactionDate" required>
+                
+                <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" required maxlength="10">
+                
+                <label for="transactionMode">Mode of Transaction:</label>
+                <select id="transactionMode" required>
+                    <option value="">Select Mode</option>
+                    <option value="Credit">Credit</option>
+                    <option value="Debit">Debit</option>
+                </select>
+
+                <label for="transactionAmount">Amount of Transaction:</label>
+                <input type="number" id="transactionAmount" required >
+            </div>
+
+            <button type="submit">Submit Transaction</button>
+            <button type="button" onclick="location.href='index.html'">Go to Home</button>
+            <p id="message"></p>
+        </form>
+    </div>
+    <script src="txScript.js"></script>
+</body>
+</html>
+

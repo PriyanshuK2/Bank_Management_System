@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+    </header>
+    <div class="container">
+        <h1>Employee Login</h1>
+        <form id="loginForm">
+            <div class="textbox">
+                <label for="loginEmpId">Employee ID:</label>
+                <input type="text" id="loginEmpId" required>
+            </div>
+            <div class="textbox">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="loginMessage"></p>
+        <a href="register_employee.html" class="register-link">Not registered? Register here</a>
+    </div>
+
+    <script>
+        // Handle the login process
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const loginEmpId = document.getElementById('loginEmpId').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+
+            // Retrieve employee data from localStorage
+            const employeeData = JSON.parse(localStorage.getItem(loginEmpId));
+
+            // Check if employee exists and the password matches
+            if (employeeData && loginPassword === employeeData.emppwd) {
+                // Successful login
+                window.location.href = 'logged_in_Homepage.html'; // Redirect to homepage
+            } else {
+                // Incorrect credentials
+                document.getElementById('loginMessage').innerText = "Invalid Employee ID or Password.";
+                document.getElementById('loginMessage').style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>

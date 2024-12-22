@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Manage Loan Request</h1>
+        <div id="loanDetails"></div>
+        <div class="form-container">
+            <form id="loanForm">
+                <div class="textbox">
+                    <label for="loanAmount">Loan Amount:</label>
+                    <input type="number" id="loanAmount" required><br><br>
+                </div>
+                <div class="textbox">
+                    <label for="loanDuration">Loan Duration (in months):</label>
+                    <input type="number" id="loanDuration" required><br><br>
+                </div>
+                <div class="textbox">
+                    <label for="loanStatus">Loan Status:</label>
+                    <select id="loanStatus" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select><br><br>
+                </div>
+                <button type="submit">Update Loan Request</button>
+                <button type="button" id="cancelLoanBtn">Cancel Loan</button>
+            </form>
+        </div>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const loanId = urlParams.get("loanId");
+
+        // Retrieve loan details from localStorage using Loan ID
+        const loan = JSON.parse(localStorage.getItem(loanId));
+
+        if (loan) {
+            // Display loan details (non-editable)
+            document.getElementById("loanDetails").innerHTML = `
+                <p><strong>Loan ID:</strong> ${loan.loanId}</p>
+                <p><strong>Customer SSN:</strong> ${loan.ssnId}</p>
+                <p><strong>Customer Name:</strong> ${loan.customerName}</p>
+                <p><strong>Customer Email:</strong> ${loan.customerEmail}</p>
+                <p><strong>Loan Amount:</strong> ${loan.loanAmount || "Not Approved"}</p>
+                <p><strong>Loan Duration:</strong> ${loan.loanDuration || "Not Approved"}</p>
+                <p><strong>Loan Status:</strong> ${loan.loanStatus || "Not Approved"}</p>
+            `;
+
+            // Prefill loan data if available
+            document.getElementById("loanAmount").value = loan.loanAmount || "";
+            document.getElementById("loanDuration").value = loan.loanDuration || "";
+            document.getElementById("loanStatus").value = loan.loanStatus || "Pending";
+        } else {
+            document.getElementById("message").innerText = "Loan not found!";
+            document.getElementById("message").style.color = "red";
+        }
+
+        document.getElementById("loanForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const loanAmount = document.getElementById("loanAmount").value;
+            const loanDuration = document.getElementById("loanDuration").value;
+            const loanStatus = document.getElementById("loanStatus").value;
+
+            // Ensure no update to SSN field or loan ID
+            const updatedLoan = { ...loan, loanAmount, loanDuration, loanStatus };
+
+            // Store updated loan data back to localStorage
+            localStorage.setItem(loanId, JSON.stringify(updatedLoan));
+
+            document.getElementById("message").innerText = "Loan request updated successfully!";
+            document.getElementById("message").style.color = "green";
+
+            // Redirect to acknowledgment page after 2 seconds
+            setTimeout(() => {
+                window.location.href = `index.html`;
+            }, 2000);
+        });
+
+        document.getElementById("cancelLoanBtn").addEventListener("click", function() {
+           
+            const canceledLoan = { ...loan, loanAmount: "", loanDuration: "", loanStatus: "Cancelled" };
+
+          
+            localStorage.setItem(loanId, JSON.stringify(canceledLoan));
+
+            document.getElementById("message").innerText = "Loan request cancelled successfully!";
+            document.getElementById("message").style.color = "red";
+
+        
+            setTimeout(() => {
+                window.location.href = `index.html`;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

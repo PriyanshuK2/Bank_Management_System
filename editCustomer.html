@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Customer Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+        <img src="output.jpg" alt="Bank Logo"></a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Update Customer Information</h1>
+        <form id="updateCustomerForm" onsubmit="return updateCustomer()">
+            <div class="textbox">
+                <label for="customerSSN">Customer SSN ID:</label>
+                <input type="text" id="customerSSN" readonly>
+
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" required>
+
+                <label for="accountNumber">Account Number:</label>
+                <input type="text" id="accountNumber" readonly>
+
+                <label for="ifscCode">IFSC Code:</label>
+                <input type="text" id="ifscCode" readonly>
+
+                <label for="accountBalance">Account Balance:</label>
+                <input type="number" id="accountBalance" required>
+
+                <label for="aadhaarCard">Aadhaar Card No.:</label>
+                <input type="text" id="aadhaarCard" maxlength="12" required>
+
+                <label for="panCard">PAN Card No.:</label>
+                <input type="text" id="panCard" maxlength="10" required>
+
+                <label for="dob">Date Of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="textbox">
+                <label for="gender">Gender:</label>
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="maritalStatus">Marital Status:</label>
+                <select id="maritalStatus" required>
+                    <option value="">Select</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                </select>
+            </div>
+            <div class="textbox">
+                <label for="customerEmail">Email:</label>
+                <input type="email" id="customerEmail" required>
+
+                <label for="customerAddress">Address:</label>
+                <textarea id="customerAddress" required></textarea>
+
+                <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" maxlength="10" required>
+            </div>
+            <button type="submit">Update Information</button>
+        </form>
+        <p id="updateMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById("aadhaarCard").addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+document.getElementById("customerName").addEventListener("input", function () {
+    this.value = this.value.replace(/[^\sa-zA-Z]/g, '');
+});
+
+document.getElementById("panCard").addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9a-zA-Z]/g, '');
+});
+        // Extract the SSN from the query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const customerSSN = urlParams.get("ssnId");
+
+        // Prefill form with customer data
+        window.onload = function() {
+            const customer = JSON.parse(localStorage.getItem(customerSSN));
+
+            if (customer && customer.ssnId === customerSSN) {
+                document.getElementById("customerSSN").value = customer.ssnId;
+                document.getElementById("customerName").value = customer.cName;
+                document.getElementById("accountNumber").value = customer.accNo;
+                document.getElementById("ifscCode").value = customer.ifsc;
+                document.getElementById("accountBalance").value = customer.accBal;
+                document.getElementById("aadhaarCard").value = customer.aadhaar;
+                document.getElementById("panCard").value = customer.panCard;
+                document.getElementById("dob").value = customer.dob;
+                document.getElementById("gender").value = customer.gender;
+                document.getElementById("maritalStatus").value = customer.maritalStatus;
+                document.getElementById("customerEmail").value = customer.custEmail;
+                document.getElementById("customerAddress").value = customer.cAdd;
+                document.getElementById("contactNumber").value = customer.cNo;
+            } else {
+                document.getElementById("updateMessage").innerText = "Customer not found.";
+                document.getElementById("updateMessage").style.color = "red";
+            }
+        };
+
+        // Handle the update process
+        function updateCustomer() {
+            const customer = JSON.parse(localStorage.getItem(customerSSN));
+
+            if (!customer || customer.ssnId !== customerSSN) {
+                document.getElementById("updateMessage").innerText = "Error: Customer data not found.";
+                document.getElementById("updateMessage").style.color = "red";
+                return false;
+            }
+
+            // Update fields
+            customer.cName = document.getElementById("customerName").value;
+            customer.accBal = document.getElementById("accountBalance").value;
+            customer.aadhaar = document.getElementById("aadhaarCard").value;
+            customer.panCard = document.getElementById("panCard").value;
+            customer.dob = document.getElementById("dob").value;
+            customer.gender = document.getElementById("gender").value;
+            customer.maritalStatus = document.getElementById("maritalStatus").value;
+            customer.custEmail = document.getElementById("customerEmail").value;
+            customer.cAdd = document.getElementById("customerAddress").value;
+            customer.cNo = document.getElementById("contactNumber").value;
+
+            // Save updated data to localStorage
+            localStorage.setItem(customerSSN, JSON.stringify(customer));
+
+            // Display success message and redirect
+            document.getElementById("updateMessage").innerText = "Customer information updated successfully!";
+            document.getElementById("updateMessage").style.color = "green";
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 2000); // Redirect to home page after 2 seconds
+
+            return false; // Prevent form submission
+            
+        }
+    </script>
+</body>
+</html>

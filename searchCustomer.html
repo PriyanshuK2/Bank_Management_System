@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Customer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="output.jpg" alt="Bank Logo">
+        </a>
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Search Customer</h1>
+        <form id="searchForm">
+            <div class="textbox">
+                <label for="customerSSN">Enter Customer SSN ID:</label>
+                <input type="text" id="customerSSN" maxlength="12" required>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+        <p id="searchMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const customerSSN = document.getElementById("customerSSN").value;
+            const customerData = JSON.parse(localStorage.getItem(customerSSN));
+
+            if (customerData) {
+                window.location.href = `editCustomer.html?ssnId=${customerSSN}`;
+            } else {
+                document.getElementById("searchMessage").innerText = "Customer not found.";
+                document.getElementById("searchMessage").style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>

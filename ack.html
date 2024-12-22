@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration Acknowledgment</title>
+    <link rel="stylesheet" href="ack.css">
+</head>
+<body>
+    <div class="ack-container">
+        <h1>Registration Successful!</h1>
+        <div class="details" id="custDetails"></div>
+        <p>You will be redirected to the home page shortly...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ssnId = urlParams.get("ssnId");
+            const cName = urlParams.get("cName");
+            const accNo = urlParams.get("accNo");
+            const ifsc = urlParams.get("ifsc");
+            const custEmail = urlParams.get("custEmail");
+            const cNo = urlParams.get("cNo");
+
+            const custDetails = `
+                <p><strong>Customer SSN ID:</strong> ${ssnId}</p>
+                <p><strong>Customer Name:</strong> ${cName}</p>
+                <p><strong>Account Number:</strong> ${accNo}</p>
+                <p><strong>IFSC Code:</strong> ${ifsc}</p>
+                <p><strong>Email:</strong> ${custEmail}</p>
+                <p><strong>Contact Number:</strong> ${cNo}</p>
+            `;
+            document.getElementById("custDetails").innerHTML = custDetails;
+        });
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 3500);
+    </script>
+</body>
+</html>

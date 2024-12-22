@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Employee Registration</h1>
+        <form id="registrationForm" onsubmit="return getReg()">
+            <div class="textbox">
+                <label for="employeeId">Employee ID:</label>
+                <input type="text" id="employeeId" readonly>
+            </div>
+            <div class="textbox">
+                <label for="empFirstName">First Name:</label>
+                <input type="text" id="empFirstName" maxlength="50" required>
+            </div>
+            <div class="textbox">
+                <label for="empLastName">Last Name:</label>
+                <input type="text" id="empLastName" maxlength="50" required>
+            </div>
+            <div class="textbox">
+                <label for="empEmail">Email:</label>
+                <input type="email" id="empEmail" required>
+            </div>
+            <div class="textbox">
+                <label for="empPassword">Password:</label>
+                <input type="password" id="empPassword" placeholder="Should contain one alphabet, special character, and digit (minimum 8 characters)" maxlength="30" required>
+            </div>
+            <div class="textbox">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" placeholder="Should be the same as password" maxlength="30" required>
+            </div>
+            <div class="textbox">
+                <label for="empAddress">Address:</label>
+                <textarea id="empAddress" maxlength="100" required></textarea>
+            </div>
+            <div class="textbox">
+                <label for="empContactNumber">Contact Number:</label>
+                <input type="text" id="empContactNumber" maxlength="10" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // This function will be called when the registration form is submitted
+        function getReg() {
+            const Efname = document.getElementById("empFirstName").value;
+            const Elname = document.getElementById("empLastName").value;
+            const empEmail = document.getElementById("empEmail").value;
+            const emppwd = document.getElementById("empPassword").value;
+            const empConPwd = document.getElementById("confirmPassword").value;
+            const empAdd = document.getElementById("empAddress").value;
+            const empCno = document.getElementById("empContactNumber").value;
+            const empId = document.getElementById("employeeId").value;
+            const message = document.getElementById("message");
+
+            // Validate Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(empEmail)) {
+                message.textContent = "Please enter a valid email address.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Validate Password
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(emppwd)) {
+                message.textContent = "Password must be at least 8 characters, include letters and numbers.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Check if passwords match
+            if (emppwd !== empConPwd) {
+                message.textContent = "Passwords do not match.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Validate Contact Number
+            if (!/^\d{10}$/.test(empCno) || /^(\d)\1{9}$/.test(empCno)) {
+                message.textContent = "Contact number must be a valid 10-digit number.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Display success message
+            message.textContent = "Registration successful!";
+            message.style.color = "green";
+
+            // Store employee data in localStorage
+            const employeeData = {
+                empId,
+                Efname,
+                Elname,
+                empEmail,
+                emppwd,
+                empCno
+            };
+            localStorage.setItem(empId, JSON.stringify(employeeData));
+            localStorage.setItem('empId', empId);
+            localStorage.setItem('Efname', Efname);
+            localStorage.setItem('Elname', Elname);
+            localStorage.setItem('empEmail', empEmail);
+            localStorage.setItem('emppwd', emppwd);
+            localStorage.setItem('empConPwd', empConPwd);
+            localStorage.setItem('empAdd', empAdd);
+            localStorage.setItem('empCno', empCno);
+
+            // Redirect to acknowledgment page after 2 seconds
+            setTimeout(() => {
+                window.location.href = `acknowlegemnt.html?empId=${empId}&Efname=${Efname}&Elname=${Elname}&empEmail=${empEmail}&empCno=${empCno}`;
+            }, 2000);
+
+            return false;
+        }
+
+        // Generate random Employee ID
+        function generateRand() {
+            return `EMP${Math.floor(1000000 + Math.random() * 9000000)}`;
+        }
+
+        // Populate Employee ID on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const employeeId = document.getElementById("employeeId");
+            employeeId.value = generateRand();
+        });
+
+        // Contact number input validation (only allow digits)
+        document.getElementById("empContactNumber").addEventListener("input", function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // First name input validation (only allow letters)
+        document.getElementById("empFirstName").addEventListener("input", function () {
+            this.value = this.value.replace(/[^a-zA-Z]/g, '');
+        });
+
+        // Last name input validation (only allow letters)
+        document.getElementById("empLastName").addEventListener("input", function () {
+            this.value = this.value.replace(/[^a-zA-Z]/g, '');
+        });
+    </script>
+</body>
+</html>

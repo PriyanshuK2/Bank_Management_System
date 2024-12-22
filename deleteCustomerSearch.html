@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Customer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="output.jpg" alt="Bank Logo">
+        <h1>Celestial Bank</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="logged_in_Homepage.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Search Customer by SSN</h1>
+        <div class="textbox">
+        <label for="searchSSN">Enter Customer SSN ID:</label>
+        <input type="text" id="searchSSN" placeholder="Enter SSN" /></div>
+        <button type="submit1" id="searchButton">Search</button>
+        <p id="searchMessage"></p>
+        <a id="removeCustomerLink" style="display: none;" href="#">Go to Remove Customer Page</a>
+        <button type="button1" id="cancelButton">Cancel and Return to Home</button>
+    </div>
+
+    <script>
+        document.getElementById("searchButton").addEventListener("click", function() {
+            const ssn = document.getElementById("searchSSN").value.trim();
+
+            // Check if SSN is provided
+            if (!ssn) {
+                document.getElementById("searchMessage").textContent = "Please enter a valid SSN.";
+                document.getElementById("searchMessage").style.color = "red";
+                return;
+            }
+
+            // Check if customer exists in localStorage
+            const customerData = JSON.parse(localStorage.getItem(ssn));
+
+            if (customerData) {
+                document.getElementById("searchMessage").textContent = "Customer found!";
+                document.getElementById("searchMessage").style.color = "green";
+                document.getElementById("removeCustomerLink").style.display = "inline";
+                document.getElementById("removeCustomerLink").href = `confirmDeleteCustomer.html?ssnId=${ssn}`;
+            } else {
+                document.getElementById("searchMessage").textContent = "Customer not found.";
+                document.getElementById("searchMessage").style.color = "red";
+                document.getElementById("removeCustomerLink").style.display = "none";
+            }
+        });
+
+        // Handle cancel button
+        document.getElementById("cancelButton").addEventListener("click", function() {
+            window.location.href = "index.html"; // Redirect to home
+        });
+    </script>
+</body>
+</html>
